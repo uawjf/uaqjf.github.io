@@ -18,17 +18,17 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: pnpm
+          cache: 'npm'
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: 8
-          run_install: true
+      # 使用 npm 安装依赖
+      - name: Install dependencies
+        run: npm install
 
+      # 运行构建脚本
       - name: Build VuePress site
-        run: pnpm docs:build
+        run: npm run docs:build
 
+      # 部署到 GitHub Pages
       - name: Deploy to GitHub Pages
         uses: crazy-max/ghaction-github-pages@v4
         with:
@@ -41,4 +41,3 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
-
